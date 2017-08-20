@@ -8,8 +8,8 @@ const create = (req, res) =>
     lastname: req.body.lastname,
     Accounts: [],
   }, { include: 'Accounts' })
-  .then(user => res.status(201).send(user))
-  .catch(error => res.status(400).send(error))
+    .then(user => res.status(201).send(user))
+    .catch(error => res.status(400).send(error))
 
 const list = (req, res) => {
   const query = Object.assign({}, req.query.query, { include: 'Accounts', order: [['createdAt', 'ASC']] })
@@ -50,8 +50,8 @@ const update = (req, res) =>
           firstname: req.body.firstname || user.firstname,
           lastname: req.body.lastname || user.lastname,
         })
-        .then(() => res.status(200).send(user))
-        .catch(error => res.status(400).send(error))
+          .then(() => res.status(200).send(user))
+          .catch(error => res.status(400).send(error))
       }
     })
     .catch(error => res.status(400).send(error))
