@@ -21,7 +21,7 @@ apiRoutes.get('/', (req, res) => res.status(200).send({
 }))
 
 /**
- * @api {post} /users Create User
+ * @api {post} /api/users Create User
  * @apiVersion 0.1.0
  * @apiGroup Users
  * @apiName CreateUser
@@ -47,7 +47,7 @@ apiRoutes.get('/', (req, res) => res.status(200).send({
 apiRoutes.post('/users', usersController.create)
 
 /**
- * @api {get} /users List Users
+ * @api {get} /api/users List Users
  * @apiVersion 0.1.0
  * @apiGroup Users
  * @apiName ListUsers
@@ -78,7 +78,7 @@ apiRoutes.post('/users', usersController.create)
 apiRoutes.get('/users', usersController.list)
 
 /**
- * @api {get} /users/:id Get User
+ * @api {get} /api/users/:id Get User
  * @apiVersion 0.1.0
  * @apiGroup Users
  * @apiName GetUser
@@ -110,7 +110,7 @@ apiRoutes.get('/users', usersController.list)
 apiRoutes.get('/users/:userId', usersController.retrieve)
 
 /**
- * @api {put} /users/:id Modify User
+ * @api {put} /api/users/:id Modify User
  * @apiVersion 0.1.0
  * @apiGroup Users
  * @apiName ModifyUser
@@ -145,7 +145,7 @@ apiRoutes.get('/users/:userId', usersController.retrieve)
 apiRoutes.put('/users/:userId', usersController.update)
 
 /**
- * @api {delete} /users/:id Delete User
+ * @api {delete} /api/users/:id Delete User
  * @apiVersion 0.1.0
  * @apiGroup Users
  * @apiName DeleteUser
@@ -166,7 +166,7 @@ apiRoutes.put('/users/:userId', usersController.update)
 apiRoutes.delete('/users/:userId', usersController.destroy)
 
 /**
- * @api {post} /accounts/:id Create Account
+ * @api {post} /api/accounts/:id Create Account
  * @apiVersion 0.1.0
  * @apiGroup Accounts
  * @apiName CreateAccount
@@ -220,7 +220,7 @@ apiRoutes.delete('/users/:userId', usersController.destroy)
 apiRoutes.post('/accounts', accountsController.create)
 
 /**
- * @api {get} /accounts List Accounts
+ * @api {get} /api/accounts List Accounts
  * @apiVersion 0.1.0
  * @apiGroup Accounts
  * @apiName ListAccounts
@@ -250,7 +250,7 @@ apiRoutes.post('/accounts', accountsController.create)
 apiRoutes.get('/accounts', accountsController.list)
 
 /**
- * @api {get} /accounts/:id Get Account
+ * @api {get} /api/accounts/:id Get Account
  * @apiVersion 0.1.0
  * @apiGroup Accounts
  * @apiName GetAccount
@@ -288,7 +288,7 @@ apiRoutes.get('/accounts', accountsController.list)
 apiRoutes.get('/accounts/:accountId', accountsController.retrieve)
 
 /**
- * @api {put} /accounts/:id Modify Account
+ * @api {put} /api/accounts/:id Modify Account
  * @apiVersion 0.1.0
  * @apiGroup Accounts
  * @apiName ModifyAccount
@@ -336,7 +336,7 @@ apiRoutes.get('/accounts/:accountId', accountsController.retrieve)
 apiRoutes.put('/accounts/:accountId', accountsController.update)
 
 /**
- * @api {delete} /accounts/:id Delete Account
+ * @api {delete} /api/accounts/:id Delete Account
  * @apiVersion 0.1.0
  * @apiGroup Accounts
  * @apiName DeleteAccount
