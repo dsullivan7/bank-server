@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "create-db": "psql -tc \"SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'\" | grep -q 1 || psql -c \"CREATE DATABASE $DATABASE_NAME\"",
-    "docs-dev": "apidoc -i app/ -o app/public/docs",
-    "docs": "apidoc -i app/ -o dist/public/docs",
+    "docs-dev": "apidoc -i app/server/routes -o app/public/docs",
+    "docs": "apidoc -i app/server/routes -o dist/public/docs",
     "test": "jest --coverage --runInBand --forceExit",
     "coverage": "nyc report --temp-directory=coverage --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",

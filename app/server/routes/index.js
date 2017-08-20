@@ -27,7 +27,7 @@ apiRoutes.get('/', (req, res) => res.status(200).send({
  * @apiName CreateUser
  *
  * @apiParam (Body Parameters) {String} [firstname]  Optional Firstname of the User
- * @apiParam (Body Parameters) {String} [lastname]   Optional Lastname of the User
+ * @apiParam (Body Parameters) {String} [lastname]  Optional Lastname of the User
  *
  * @apiSuccess (Response Fields) {String} firstname Firstname of the User
  * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
