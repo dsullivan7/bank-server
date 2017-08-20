@@ -10,4 +10,4 @@ env:
 services:
   - postgresql
 before_script:
-  - npm run create-db
+  - psql -c 'create database $DATABASE_NAME;' -U postgres
