@@ -18,8 +18,8 @@ const umzug = new Umzug({
 jest.mock('../../../server/utils/googleUtils', () =>
   ({
     verifyToken: jest.fn().mockReturnValue(
-        Promise.resolve(require('../../resources/googlePayload').default), // eslint-disable-line global-require
-      ),
+      Promise.resolve(require('../../resources/googlePayload').default), // eslint-disable-line global-require
+    ),
   }))
 
 beforeAll(async () => {
