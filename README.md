@@ -1,5 +1,8 @@
 # Bank Server
 
+[![Build Status](https://travis-ci.org/dsullivan7/bank-server.svg?branch=master)](https://travis-ci.org/dsullivan7/bank-server)
+[![Coverage Status](https://img.shields.io/coveralls/dsullivan7/bank-server.svg)](https://coveralls.io/r/dsullivan7/bank-server?branch=master)
+
 ## Start
 ```
 # ensure the environment variable $DATABASE_NAME is set to what you would like the database to be named
