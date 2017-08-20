@@ -103,7 +103,8 @@ apiRoutes.get('/users/:userId', usersController.retrieve)
  * @swagger
  * /api/users/{id}:
  *   put:
- *     tags: Users
+ *     tags:
+ *       - Users
  *     description: Updates a single user
  *     produces: application/json
  *     parameters:
@@ -225,7 +226,8 @@ apiRoutes.get('/accounts/:accountId', accountsController.retrieve)
  * @swagger
  * /api/accounts/{id}:
  *   put:
- *     tags: Accounts
+ *     tags:
+ *       - Accounts
  *     description: Updates a single account
  *     produces: application/json
  *     parameters:
