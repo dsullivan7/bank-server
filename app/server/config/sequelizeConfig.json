@@ -1,14 +1,14 @@
 {
   "development": {
     "use_env_variable": "DATABASE_URL",
-    "logging": false
+    "logging": true
   },
   "test": {
     "use_env_variable": "DATABASE_URL",
-    "logging": false
+    "logging": true
   },
   "production": {
     "use_env_variable": "DATABASE_URL",
-    "logging": false
+    "logging": true
   }
 }
