@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "create-db": "psql -tc \"SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'\" | grep -q 1 || psql -c \"CREATE DATABASE $DATABASE_NAME\"",
-    "test": "jest --forceExit --coverage",
+    "test": "jest --coverage",
     "coverage": "nyc report --temp-directory=coverage --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
     "build": "babel app  --ignore app/test --copy-files --out-dir dist",
