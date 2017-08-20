@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
@@ -12,8 +13,6 @@ const swaggerDefinition = {
     version: '1.0.0',
     description: 'A simple REST API for bank accounts',
   },
-  host: 'localhost:8000',
-  basePath: '/',
 }
 
 // Set up the express app
@@ -29,17 +28,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // Inject our routes into the application.
 app.use('/api', routes)
 
+app.use(express.static(path.join(__dirname, 'public')))
+
 // options for the swagger docs
 const options = {
   swaggerDefinition,
-  apis: ['./server/routes/*.js'],
+  apis: ['./app/server/routes/*.js'],
 }
 
 // initialize swagger-jsdoc
 const swaggerSpec = swaggerJSDoc(options)
 
 // serve api documentation
-app.get('/documentation', (req, res) => {
+app.get('/api.json', (req, res) => {
   res.send(swaggerSpec)
 })
 
