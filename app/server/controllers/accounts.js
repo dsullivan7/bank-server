@@ -3,7 +3,7 @@ import models from '../models'
 const Account = models.Account
 
 const create = async (req, res) => {
-  const userIds = req.body.users
+  const userIds = req.body.Users
 
   try {
     let account = await Account.create({
@@ -44,8 +44,8 @@ const retrieve = (req, res) => {
 }
 
 const update = async (req, res) => {
-  const userIdsAdd = req.body.users && req.body.users.add
-  const userIdsRemove = req.body.users && req.body.users.remove
+  const userIdsAdd = req.body.Users && req.body.Users.add
+  const userIdsRemove = req.body.Users && req.body.Users.remove
 
   try {
     let account = await Account.findById(req.params.accountId)

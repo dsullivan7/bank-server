@@ -21,251 +21,226 @@ apiRoutes.get('/', (req, res) => res.status(200).send({
 }))
 
 /**
- * @swagger
- * definition:
- *   User:
- *     properties:
- *       firstname:
- *         type: string
- *       lastname:
- *         type: string
- *       googleId:
- *         type: string
- *       Accounts:
- *         type: array
- */
-
-/**
- * @swagger
- * /api/users:
- *   post:
- *     tags:
- *       - Users
- *     description: Creates a new user
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: user
- *         description: User object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/User'
- *     responses:
- *       201:
- *         description: The newly created user
- *         schema:
- *           $ref: '#/definitions/User'
+ * @api {post} /users Create User
+ * @apiGroup Users
+ * @apiName CreateUser
+ *
+ * @apiParam (Body Parameters) {String} [firstname]  Optional Firstname of the User
+ * @apiParam (Body Parameters) {String} [lastname]   Optional Lastname of the User
+ *
+ * @apiSuccess (Response Fields) {String} firstname Firstname of the User
+ * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
+ * @apiSuccess (Response Fields) {Number} id  Id of the User
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 201 Created
+ *     {
+ *       "firstname": "Michael",
+ *       "lastname": "Jordan",
+ *       "Accounts": [],
+ *       "id": 1
+ *     }
+ *
  */
 apiRoutes.post('/users', usersController.create)
 
 /**
- * @swagger
- * /api/users:
- *   get:
- *     tags:
- *       - Users
- *     description: Returns all users
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: An array of users
- *         schema:
- *           $ref: '#/definitions/User'
+ * @api {get} /users List Users
+ * @apiGroup Users
+ * @apiName ListUsers
+ *
+ * @apiSuccess (Response Fields) {String} firstname Firstname of the User
+ * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
+ * @apiSuccess (Response Fields) {Number} id  Id of the User
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [
+ *       {
+ *         "firstname": "Michael",
+ *         "lastname": "Jordan",
+ *         "Accounts": [],
+ *         "id": 1
+ *       },
+ *       {
+ *         "firstname": "Kobe",
+ *         "lastname": "Bryant",
+ *         "Accounts": [],
+ *         "id": 2
+ *       },
+ *     ]
+ *
  */
 apiRoutes.get('/users', usersController.list)
 
 /**
- * @swagger
- * /api/users/{id}:
- *   get:
- *     tags:
- *       - Users
- *     description: Returns a single user
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         description: User's id
- *         in: path
- *         required: true
- *         type: integer
- *     responses:
- *       200:
- *         description: A single user
- *         schema:
- *           $ref: '#/definitions/User'
+ * @api {get} /users/:id Get User
+ * @apiGroup Users
+ * @apiName GetUser
+ *
+ * @apiParam (Path Parameters) {Number} id User's unique ID
+ *
+ * @apiSuccess (Response Fields) {String} firstname Firstname of the User
+ * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
+ * @apiSuccess (Response Fields) {Number} id  Id of the User
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "firstname": "Michael",
+ *       "lastname": "Jordan",
+ *       "Accounts": [],
+ *       "id": 1
+ *     }
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "User Not Found"
+ *     }
  */
 apiRoutes.get('/users/:userId', usersController.retrieve)
 
 /**
- * @swagger
- * /api/users/{id}:
- *   put:
- *     tags:
- *       - Users
- *     description: Updates a single user
- *     produces: application/json
- *     parameters:
- *       - name: user
- *         description: User object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/User'
- *     responses:
- *       200:
- *         description: The newly updated user
- *         schema:
- *           $ref: '#/definitions/User'
+ * @api {put} /users/:id Modify User
+ * @apiGroup Users
+ * @apiName ModifyUser
+ *
+ * @apiParam (Path Parameters) {Number} id User's unique ID
+ *
+ * @apiParam (Body Parameters) {String} [firstname]  Optional Firstname of the User
+ * @apiParam (Body Parameters) {String} [lastname]   Optional Lastname of the User
+ *
+ * @apiSuccess (Response Fields) {String} firstname Firstname of the User
+ * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
+ * @apiSuccess (Response Fields) {Number} id  Id of the User
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "firstname": "Michael",
+ *       "lastname": "Jordan",
+ *       "Accounts": [],
+ *       "id": 1
+ *     }
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "User Not Found"
+ *     }
  */
 apiRoutes.put('/users/:userId', usersController.update)
 
 /**
- * @swagger
- * /api/users/{id}:
- *   delete:
- *     tags:
- *       - Users
- *     description: Deletes a single user
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         description: Users's id
- *         in: path
- *         required: true
- *         type: integer
- *     responses:
- *       204:
- *         description: Successfully deleted
+ * @api {delete} /users/:id Delete User
+ * @apiGroup Users
+ * @apiName DeleteUser
+ *
+ * @apiParam (Path Parameters) {Number} id Users unique ID
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 204 No Content
+ *
+ * @apiError UserNotFound The id of the User was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "User Not Found"
+ *     }
  */
 apiRoutes.delete('/users/:userId', usersController.destroy)
 
-
-/**
- * @swagger
- * definition:
- *   Account:
- *     properties:
- *       currency:
- *         type: string
- *       balance:
- *         type: float
- *       Users:
- *         type: array
- */
-
-/**
- * @swagger
- * /api/accounts:
- *   post:
- *     tags:
- *       - Accounts
- *     description: Creates a new account
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: user
- *         description: Account object
- *         in: body
- *         required: true
- *         schema:
- *           $ref: '#/definitions/Account'
- *     responses:
- *       201:
- *         description: The newly created account
- *         schema:
- *           $ref: '#/definitions/Account'
- */
 apiRoutes.post('/accounts', accountsController.create)
 
-
 /**
- * @swagger
- * /api/accounts:
- *   get:
- *     tags:
- *       - Accounts
- *     description: Returns all accounts
- *     produces:
- *       - application/json
- *     responses:
- *       200:
- *         description: An array of accounts
- *         schema:
- *           $ref: '#/definitions/Account'
+ * @api {get} /accounts List Accounts
+ * @apiGroup Accounts
+ * @apiName ListAccounts
+ *
+ * @apiSuccess (Response Fields) {String} currency Currency of the Account
+ * @apiSuccess (Response Fields) {Number} balance  Balance of the Account
+ * @apiSuccess (Response Fields) {Object[]} Users  Array of Users associated with the Account
+ * @apiSuccess (Response Fields) {Number} id  Id of the Account
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     [
+ *       {
+ *         "currency": "USD",
+ *         "balance": 100.99,
+ *         "Users": [],
+ *         "id": 1
+ *       },
+ *       {
+ *         "currency": "EUR",
+ *         "balance": 100.99,
+ *         "Users": [],
+ *         "id": 2
+ *       },
+ *     ]
  */
 apiRoutes.get('/accounts', accountsController.list)
 
 /**
- * @swagger
- * /api/accounts/{id}:
- *   get:
- *     tags:
- *       - Accounts
- *     description: Returns a single account
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         description: Account's id
- *         in: path
- *         required: true
- *         type: integer
- *     responses:
- *       200:
- *         description: A single account
- *         schema:
- *           $ref: '#/definitions/Account'
+ * @api {get} /accounts/:id Get Account
+ * @apiGroup Accounts
+ * @apiName GetAccount
+ *
+ * @apiParam (Path Parameters) {Number} id Account's unique ID
+ *
+ * @apiSuccess (Response Fields) {String} firstname Firstname of the Account
+ * @apiSuccess (Response Fields) {String} lastname  Lastname of the Account
+ * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Users associated with the Account
+ * @apiSuccess (Response Fields) {Number} id  Id of the Account
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "currency": "USD",
+ *       "balance": 100.99,
+ *       "Users": [],
+ *       "id": 1
+ *     }
+ *
+ * @apiError AccountNotFound The id of the Account was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "Account Not Found"
+ *     }
  */
 apiRoutes.get('/accounts/:accountId', accountsController.retrieve)
 
-/**
- * @swagger
- * /api/accounts/{id}:
- *   put:
- *     tags:
- *       - Accounts
- *     description: Updates a single account
- *     produces: application/json
- *     parameters:
- *       - name: account
- *         description: Account object
- *         in: body
- *         required: false
- *         schema:
- *           $ref: '#/definitions/Account'
- *       - name: users
- *         description:
- *         in: body,
- *     responses:
- *       200:
- *         description: The newly updated account
- *         schema:
- *           $ref: '#/definitions/Account'
- */
 apiRoutes.put('/accounts/:accountId', accountsController.update)
 
 /**
- * @swagger
- * /api/accounts/{id}:
- *   delete:
- *     tags:
- *       - Accounts
- *     description: Deletes a single account
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         description: Account's id
- *         in: path
- *         required: true
- *         type: integer
- *     responses:
- *       204:
- *         description: Successfully deleted
+ * @api {delete} /accounts/:id Delete Account
+ * @apiGroup Accounts
+ * @apiName DeleteAccount
+ *
+ * @apiParam (Path Parameters) {Number} id Account's unique ID
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 204 No Content
+ *
+ * @apiError AccountNotFound The id of the Account was not found.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "message": "Account Not Found"
+ *     }
  */
 apiRoutes.delete('/accounts/:accountId', accountsController.destroy)
 

@@ -60,7 +60,7 @@ describe('account model', () => {
 
   test('should create an account for a user account', async () => {
     const user = await db.User.create({ firstname: 'Blah', lastname: 'Blahdy' })
-    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67, users: [user.id] }).set('Authorization', 'Bearer someToken')
+    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67, Users: [user.id] }).set('Authorization', 'Bearer someToken')
     const account = await db.Account.findById(res.body.id)
     const userWithAccount = await db.User.findById(user.id)
 
@@ -122,7 +122,7 @@ describe('account model', () => {
       {
         currency: 'EUR',
         balance: 789.10,
-        users: { add: [user1.id, user2.id] },
+        Users: { add: [user1.id, user2.id] },
       })
       .set('Authorization', 'Bearer someToken')
 
@@ -151,7 +151,7 @@ describe('account model', () => {
       {
         currency: 'EUR',
         balance: 789.10,
-        users: { remove: [user2.id] },
+        Users: { remove: [user2.id] },
       })
       .set('Authorization', 'Bearer someToken')
 
