@@ -1,8 +1,19 @@
 /* eslint-env node, jest */
 
 import request from 'supertest'
+import Umzug from 'umzug'
 import db from '../../../server/models'
 import app from '../../../app'
+
+const umzug = new Umzug({
+  storage: 'sequelize',
+
+  storageOptions: {
+    sequelize: db.sequelize,
+  },
+
+  migrations: { path: 'app/server/migrations', params: [db.sequelize.getQueryInterface(), db.Sequelize] },
+})
 
 jest.mock('../../../server/utils/googleUtils', () =>
   ({
@@ -11,9 +22,17 @@ jest.mock('../../../server/utils/googleUtils', () =>
       ),
   }))
 
+beforeAll(async () => {
+  await db.sequelize.drop()
+})
+
 beforeEach(async () => {
-  // drops table and re-creates it
-  await db.sequelize.sync({ force: true })
+  // excutes migrations
+  await umzug.up()
+})
+
+afterEach(async () => {
+  await db.sequelize.drop()
 })
 
 describe('account model', () => {

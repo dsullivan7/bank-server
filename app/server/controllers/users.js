@@ -3,15 +3,16 @@ import models from '../models'
 const User = models.User
 
 const create = (req, res) =>
-    User.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-    })
-    .then(user => res.status(201).send(user))
-    .catch(error => res.status(400).send(error))
+  User.create({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    Accounts: [],
+  }, { include: 'Accounts' })
+  .then(user => res.status(201).send(user))
+  .catch(error => res.status(400).send(error))
 
 const list = (req, res) => {
-  const query = req.query.query || {}
+  const query = Object.assign({}, req.query.query, { include: 'Accounts', order: [['createdAt', 'ASC']] })
 
   User.findAll(query)
     .then(users => res.status(200).send(users))
@@ -25,7 +26,7 @@ const retrieve = (req, res) => {
     return null
   }
 
-  User.findById(req.params.userId).then((user) => {
+  User.findById(req.params.userId, { include: 'Accounts' }).then((user) => {
     if (!user) {
       res.status(404).send({
         message: 'User Not Found',
@@ -38,7 +39,7 @@ const retrieve = (req, res) => {
 }
 
 const update = (req, res) =>
-  User.findById(req.params.userId)
+  User.findById(req.params.userId, { include: 'Accounts' })
     .then((user) => {
       if (!user) {
         res.status(404).send({

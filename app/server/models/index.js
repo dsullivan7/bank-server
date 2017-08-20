@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import Sequelize from 'sequelize'
 
-import sequelizeJSON from '../config/config.json'
+import sequelizeJSON from '../config/sequelizeConfig.json'
 import config from '../config/config'
 
 const basename = path.basename(module.filename)
