@@ -9,5 +9,7 @@ env:
   - DATABASE_URL=postgres://localhost:5432/bank_test
 services:
   - postgresql
+addons:
+  postgresql: "9.6"
 before_script:
   - psql -c 'create database bank_test;' -U postgres

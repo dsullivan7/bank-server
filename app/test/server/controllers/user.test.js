@@ -28,14 +28,10 @@ beforeAll(async () => {
 
 beforeEach(async () => {
   // excutes migrations
-  console.log('umzug')
-  console.log(umzug)
   await umzug.up()
 })
 
 afterEach(async () => {
-  console.log('db.sequelize')
-  console.log(db.sequelize)
   await db.sequelize.drop()
 })
 
