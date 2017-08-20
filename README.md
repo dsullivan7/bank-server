@@ -23,3 +23,6 @@ eval $(cat .env) npm run start-dev
 ```bash
 eval $(cat .test-env) npm test
 ```
+
+## Demo
+https://sullivan-bank-server.herokuapp.com/docs
