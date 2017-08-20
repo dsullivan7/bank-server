@@ -12,4 +12,4 @@ services:
 addons:
   postgresql: "9.6"
 before_script:
-  - psql -c 'create database bank_test;' -U postgres
+  - npm run create-db
