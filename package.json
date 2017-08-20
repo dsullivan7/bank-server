@@ -4,14 +4,14 @@
   "description": "A REST web server for a bank",
   "main": "app.js",
   "scripts": {
-    "create-db": "psql -h $DATABASE_HOST -tc \"SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'\" | grep -q 1 || psql -h $DATABASE_HOST  -c \"CREATE DATABASE $DATABASE_NAME\"",
+    "create-db": "psql -tc \"SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'\" | grep -q 1 || psql -c \"CREATE DATABASE $DATABASE_NAME\"",
     "docs": "apidoc -i app/ -o app/public/docs",
     "test": "jest --coverage --runInBand --forceExit",
     "coverage": "nyc report --temp-directory=coverage --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
     "build": "babel app  --ignore app/test --copy-files --out-dir dist",
     "lint": "eslint app",
-    "start": "npm run clean && npm run docs && npm run build && npm run create-db && npm run migrate && node ./dist/bin/start",
+    "start": "npm run clean && npm run docs && npm run build && npm run migrate && node ./dist/bin/start",
     "start-dev": "nodemon ./app/bin/start --exec babel-node",
     "migrate": "sequelize db:migrate",
     "migrate-undo": "sequelize db:migrate:undo"
