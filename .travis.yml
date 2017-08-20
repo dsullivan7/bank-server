@@ -5,3 +5,10 @@ node_js:
   - "6"
   - "5"
 after_success: npm run coverage
+env:
+  - DATABASE_NAME=bank_test
+  - DATABASE_URL=postgres://localhost:5432/$DATABASE_NAME
+services:
+  - postgresql
+before_script:
+  - npm run create-db
