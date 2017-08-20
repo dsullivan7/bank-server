@@ -1,0 +1,6 @@
+{
+  "name": "Bank API",
+  "version": "0.1.0",
+  "description": "Basic REST API to handle bank accounts",
+  "title": "Bank API"
+}
