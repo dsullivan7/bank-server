@@ -8,6 +8,7 @@
 # ensure the environment variable $DATABASE_NAME is set to what you would like the database to be named
 # ensure the environment variable $DATABASE_URL is set to your postgres url
 npm install
+npm run create-db
 npm start
 ```
 
