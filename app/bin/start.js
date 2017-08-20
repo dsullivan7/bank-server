@@ -1,7 +1,7 @@
 import http from 'http'
 import app from '../app'
 
-const port = parseInt(process.env.PORT, 10) || 8000
+const port = process.env.PORT || 8000
 const host = process.env.HOST || 'localhost'
 
 app.set('port', port)
