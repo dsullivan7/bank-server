@@ -6,6 +6,7 @@
   "scripts": {
     "create-db": "psql -tc \"SELECT 1 FROM pg_database WHERE datname = '$DATABASE_NAME'\" | grep -q 1 || psql -c \"CREATE DATABASE $DATABASE_NAME\"",
     "test": "jest --forceExit --coverage",
+    "coverage": "nyc report --temp-directory=coverage --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
     "build": "babel app  --ignore app/test --copy-files --out-dir dist",
     "lint": "eslint app",
@@ -30,10 +31,12 @@
     "node": "8.1.4"
   },
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.1.3",
     "eslint-plugin-import": "^2.2.0",
     "jest": "^20.0.4",
+    "nyc": "^11.1.0",
     "supertest": "^3.0.0",
     "umzug": "^2.0.1"
   },
