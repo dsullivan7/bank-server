@@ -10,17 +10,11 @@
   var clientID = 'TNg3JDzqcJ9Sd8PcP37ZybgrJW85zZ9p';
 
   var lock = new Auth0Lock(clientID, domain);
-  lock.show({
-    focusInput: false,
-    popup: true,
-  }, function (err, profile, token) {
-    if(err){
-      alert(err);
-    } else{
-      console.log(token)
-      alert(token)
-    }
-  });
+  lock.on("authenticated", function(authResult) {
+    console.log('authResult')
+    console.log(authResult)
+  })
+  lock.show()
 </script>
 </body>
 </html>
