@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Latest minor release -->
+  <script src="https://cdn.auth0.com/js/lock/10.2/lock.min.js"></script>
+</head>
+<body>
+<script>
+  var domain = 'sullivan-bank-server.auth0.com';
+  var clientID = 'TNg3JDzqcJ9Sd8PcP37ZybgrJW85zZ9p';
+
+  var lock = new Auth0Lock(clientID, domain);
+  lock.show({
+    focusInput: false,
+    popup: true,
+  }, function (err, profile, token) {
+    if(err){
+      alert(err);
+    } else{
+      console.log(token)
+      alert(token)
+    }
+  });
+</script>
+</body>
+</html>
