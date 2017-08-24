@@ -18,6 +18,8 @@ const umzug = new Umzug({
 jest.mock('express-jwt', () => jest.fn().mockReturnValue((req, res, next) => {
   req.user = {
     sub: 'madeup',
+    given_name: 'MyFirstName',
+    family_name: 'MyLastName',
   }
   next()
 }))
@@ -55,6 +57,8 @@ describe('user model', () => {
     const res = await request(app).get('/api/users/me')
 
     expect(res.statusCode).toBe(200)
+    expect(res.body.firstName).toBe('MyFirstName')
+    expect(res.body.lastName).toBe('MyLastName')
     expect(res.body.auth0Id).toBe('madeup')
     expect(res.body.Accounts.length).toBe(0)
   })

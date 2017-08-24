@@ -9,11 +9,16 @@ const getUser = (req, res, next) => {
       if (created) {
         return user.update(
           {
+            firstName: req.user.given_name,
+            lastName: req.user.family_name,
             Accounts: [],
-          }, { include: 'Accounts' }).then(() => next())
+          },
+          { include: 'Accounts' },
+        )
       }
-      return next()
+      return user
     })
+    .then(() => next())
     .catch((err) => {
       console.error('Error creating the logged in user')
       console.error(err)
