@@ -103,7 +103,6 @@ describe('account model', () => {
         currency: 'EUR',
         balance: 789.10,
       })
-      
 
     account = await db.Account.findById(account.id)
 
