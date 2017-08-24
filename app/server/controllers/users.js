@@ -1,17 +1,23 @@
 import models from '../models'
+import { logger } from '../logger'
 
 const User = models.User
 
-const create = (req, res) =>
-  User.create({
+const create = (req, res) => {
+  logger.debug('list users')
+
+  return User.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     Accounts: [],
   }, { include: 'Accounts' })
     .then(user => res.status(201).send(user))
     .catch(error => res.status(400).send(error))
+}
 
 const list = (req, res) => {
+  logger.debug('list users')
+
   const query = Object.assign({}, req.query.query, { include: 'Accounts', order: [['createdAt', 'ASC']] })
 
   User.findAll(query)
@@ -20,6 +26,8 @@ const list = (req, res) => {
 }
 
 const retrieve = (req, res) => {
+  logger.debug('retrieve user')
+
   // check to see if we are looking for the currently logged on user
   if (req.params.userId === 'me') {
     res.status(200).send(res.locals.user)
@@ -38,7 +46,9 @@ const retrieve = (req, res) => {
   return null
 }
 
-const update = (req, res) =>
+const update = (req, res) => {
+  logger.debug('updating user')
+
   User.findById(req.params.userId, { include: 'Accounts' })
     .then((user) => {
       if (!user) {
@@ -55,8 +65,11 @@ const update = (req, res) =>
       }
     })
     .catch(error => res.status(400).send(error))
+}
 
-const destroy = (req, res) =>
+const destroy = (req, res) => {
+  logger.debug('destroying user')
+
   User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
@@ -70,6 +83,7 @@ const destroy = (req, res) =>
       }
     })
     .catch(error => res.status(400).send(error))
+}
 
 module.exports = {
   create,

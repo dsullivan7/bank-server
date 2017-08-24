@@ -1,4 +1,5 @@
 import models from '../models'
+import { logger } from '../logger'
 
 const User = models.User
 
@@ -18,10 +19,10 @@ const getUser = (req, res, next) => {
       }
       return user
     })
-    .then(() => next())
+    .then(() => Promise.resolve(next()))
     .catch((err) => {
-      console.error('Error creating the logged in user')
-      console.error(err)
+      logger.error('Error creating the logged in user')
+      logger.error(err)
       res.status(500).send({ message: 'An error occured while creating the user.' })
     })
 }
