@@ -1,10 +1,27 @@
 import 'babel-polyfill'
 import path from 'path'
 import express from 'express'
+import jwt from 'express-jwt'
+import jwksRsa from 'jwks-rsa'
 import logger from 'morgan'
 import bodyParser from 'body-parser'
 
+import config from './server/config/config'
 import routes from './server/routes'
+
+const secret = jwksRsa.expressJwtSecret({
+  cache: true,
+  rateLimit: true,
+  jwksRequestsPerMinute: 5,
+  jwksUri: `https://${config.fields.auth0Domain}/.well-known/jwks.json`,
+})
+
+const jwtCheck = jwt({
+  secret,
+  audience: config.fields.auth0ClientId,
+  issuer: `https://${config.fields.auth0Domain}/`,
+  algorithms: ['RS256'],
+})
 
 // Set up the express app
 const app = express()
@@ -17,6 +34,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // Inject our routes into the application.
+app.use('/api', jwtCheck)
 app.use('/api', routes)
 
 app.use(express.static(path.join(__dirname, 'public')))

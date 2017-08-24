@@ -2,19 +2,16 @@ const env = process.env.NODE_ENV || 'development'
 
 const config = {
   development: {
-    googleClientId: process.env.GOOGLE_CLIENT_ID,
-    googleAndroidClientId: process.env.GOOGLE_ANDROID_CLIENT_ID,
-    googleIOSClientId: process.env.GOOGLE_IOS_CLIENT_ID,
+    auth0ClientId: process.env.AUTH0_CLIENT_ID,
+    auth0Domain: process.env.AUTH0_DOMAIN,
   },
   test: {
-    googleClientId: process.env.GOOGLE_CLIENT_ID,
-    googleAndroidClientId: process.env.GOOGLE_ANDROID_CLIENT_ID,
-    googleIOSClientId: process.env.GOOGLE_IOS_CLIENT_ID,
+    auth0ClientId: process.env.AUTH0_CLIENT_ID,
+    auth0Domain: process.env.AUTH0_DOMAIN,
   },
   production: {
-    googleClientId: process.env.GOOGLE_CLIENT_ID,
-    googleAndroidClientId: process.env.GOOGLE_ANDROID_CLIENT_ID,
-    googleIOSClientId: process.env.GOOGLE_IOS_CLIENT_ID,
+    auth0ClientId: process.env.AUTH0_CLIENT_ID,
+    auth0Domain: process.env.AUTH0_DOMAIN,
   },
 }
 

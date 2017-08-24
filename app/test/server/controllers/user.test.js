@@ -15,12 +15,12 @@ const umzug = new Umzug({
   migrations: { path: 'app/server/migrations', params: [db.sequelize.getQueryInterface(), db.Sequelize] },
 })
 
-jest.mock('../../../server/utils/googleUtils', () =>
-  ({
-    verifyToken: jest.fn().mockReturnValue(
-      Promise.resolve(require('../../resources/googlePayload').default), // eslint-disable-line global-require
-    ),
-  }))
+jest.mock('express-jwt', () => jest.fn().mockReturnValue((req, res, next) => {
+  req.user = {
+    sub: 'madeup',
+  }
+  next()
+}))
 
 beforeAll(async () => {
   await db.sequelize.drop()

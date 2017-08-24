@@ -14,7 +14,7 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING,
       },
-      googleId: {
+      auth0Id: {
         type: Sequelize.STRING,
       },
       createdAt: {
