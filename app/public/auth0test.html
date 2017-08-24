@@ -6,13 +6,12 @@
 </head>
 <body>
 <script>
-  var domain = 'sullivan-bank-server.auth0.com';
-  var clientID = 'TNg3JDzqcJ9Sd8PcP37ZybgrJW85zZ9p';
+  var domain = 'sullivan-bank-server.auth0.com'
+  var clientID = 'TNg3JDzqcJ9Sd8PcP37ZybgrJW85zZ9p'
 
-  var lock = new Auth0Lock(clientID, domain);
+  var lock = new Auth0Lock(clientID, domain)
   lock.on("authenticated", function(authResult) {
-    console.log('authResult')
-    console.log(authResult)
+    alert(authResult.accessToken)
   })
   lock.show()
 </script>
