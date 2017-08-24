@@ -23,7 +23,7 @@ window.addEventListener('load', function() {
     webAuth.authorize();
   });
 
-    var loginStatus = document.querySelector('.container h4');
+  var loginStatus = document.querySelector('.container h4');
   var loginView = document.getElementById('login-view');
   var homeView = document.getElementById('home-view');
 
@@ -71,6 +71,8 @@ window.addEventListener('load', function() {
 
   function handleAuthentication() {
     webAuth.parseHash(function(err, authResult) {
+      console.log('authentication')
+      console.log(authResult)
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         setSession(authResult);
