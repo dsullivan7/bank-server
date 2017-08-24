@@ -8,17 +8,9 @@ import config from '../config/config'
 const basename = path.basename(module.filename)
 const sequelizeConfig = sequelizeJSON[config.env]
 
-let sequelize
 const db = {}
 
-if (sequelizeConfig.use_env_variable) {
-  sequelize = new Sequelize(process.env[sequelizeConfig.use_env_variable], sequelizeConfig)
-} else {
-  sequelize = new Sequelize(sequelizeConfig.database,
-                            sequelizeConfig.username,
-                            sequelizeConfig.password,
-                            sequelizeConfig)
-}
+const sequelize = new Sequelize(process.env[sequelizeConfig.use_env_variable], sequelizeConfig)
 
 fs.readdirSync(__dirname)
   .filter(file => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
