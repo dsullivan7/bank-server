@@ -8,8 +8,14 @@
 <script>
   var domain = 'sullivan-bank-server.auth0.com'
   var clientID = 'TNg3JDzqcJ9Sd8PcP37ZybgrJW85zZ9p'
+  var options = {
+    auth: {
+      responseType: 'id_token',
+      params: {scope: 'openid email'}
+    }
+  }
 
-  var lock = new Auth0Lock(clientID, domain)
+  var lock = new Auth0Lock(clientID, domain, options)
   lock.on("authenticated", function(authResult) {
     alert(authResult.accessToken)
   })
