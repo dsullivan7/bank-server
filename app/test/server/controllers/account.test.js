@@ -39,7 +39,7 @@ afterEach(async () => {
 describe('account model', () => {
   test('should get an account', async () => {
     const account = await db.Account.create({ currency: 'USD', balance: 1234.67 })
-    const res = await request(app).get(`/api/accounts/${account.id}`).set('Authorization', 'Bearer someToken')
+    const res = await request(app).get(`/api/accounts/${account.id}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.type).toBe('application/json')
@@ -48,7 +48,7 @@ describe('account model', () => {
   })
 
   test('should create a account', async () => {
-    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67 }).set('Authorization', 'Bearer someToken')
+    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67 })
     const account = await db.Account.findById(res.body.id)
 
     expect(res.statusCode).toBe(201)
@@ -61,7 +61,7 @@ describe('account model', () => {
 
   test('should create an account for a user account', async () => {
     const user = await db.User.create({ firstname: 'Blah', lastname: 'Blahdy' })
-    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67, Users: [user.id] }).set('Authorization', 'Bearer someToken')
+    const res = await request(app).post('/api/accounts').send({ currency: 'USD', balance: 1234.67, Users: [user.id] })
     const account = await db.Account.findById(res.body.id)
     const userWithAccount = await db.User.findById(user.id)
 
@@ -85,7 +85,7 @@ describe('account model', () => {
   test('should list all accounts', async () => {
     await db.Account.create({ currency: 'USD', balance: 1234.56 })
     await db.Account.create({ currency: 'EUR', balance: 789.10 })
-    const res = await request(app).get('/api/accounts').set('Authorization', 'Bearer someToken')
+    const res = await request(app).get('/api/accounts')
 
     expect(res.statusCode).toBe(200)
     expect(res.type).toBe('application/json')
@@ -103,7 +103,7 @@ describe('account model', () => {
         currency: 'EUR',
         balance: 789.10,
       })
-      .set('Authorization', 'Bearer someToken')
+      
 
     account = await db.Account.findById(account.id)
 
@@ -125,7 +125,6 @@ describe('account model', () => {
         balance: 789.10,
         Users: { add: [user1.id, user2.id] },
       })
-      .set('Authorization', 'Bearer someToken')
 
     const updatedAccount = await db.Account.findById(account.id, { include: 'Users' })
     const account1 = await user1.getAccounts()
@@ -154,7 +153,6 @@ describe('account model', () => {
         balance: 789.10,
         Users: { remove: [user2.id] },
       })
-      .set('Authorization', 'Bearer someToken')
 
     const updatedAccount = await db.Account.findById(account.id, { include: 'Users' })
     const account1 = await user1.getAccounts()
@@ -174,7 +172,7 @@ describe('account model', () => {
 
   test('should delete a account', async () => {
     const account = await db.Account.create({ currency: 'USD', balance: 1000.00 })
-    const res = await request(app).delete(`/api/accounts/${account.id}`).set('Authorization', 'Bearer someToken')
+    const res = await request(app).delete(`/api/accounts/${account.id}`)
     const foundAccount = await db.Account.findById(account.id)
 
     expect(res.statusCode).toBe(204)

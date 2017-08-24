@@ -36,32 +36,32 @@ afterEach(async () => {
 })
 
 describe('user model', () => {
-  // test('should return the logged in user', async () => {
-  //   await db.User.create({
-  //     firstName: 'Firstname',
-  //     lastName: 'Lastname',
-  //     googleId: 'myGoogleId' })
+  test('should return the logged in user', async () => {
+    await db.User.create({
+      firstName: 'Firstname',
+      lastName: 'Lastname',
+      auth0Id: 'madeup' })
 
-  //   const res = await request(app).get('/api/users/me').set('Authorization', 'Bearer someToken')
+    const res = await request(app).get('/api/users/me')
 
-  //   expect(res.statusCode).toBe(200)
-  //   expect(res.body.firstName).toBe('Firstname')
-  //   expect(res.body.lastName).toBe('Lastname')
-  //   expect(res.body.Accounts.length).toBe(0)
-  // })
+    expect(res.statusCode).toBe(200)
+    expect(res.body.firstName).toBe('Firstname')
+    expect(res.body.lastName).toBe('Lastname')
+    expect(res.body.auth0Id).toBe('madeup')
+    expect(res.body.Accounts.length).toBe(0)
+  })
 
-  // test('should create and return the logged in user', async () => {
-  //   const res = await request(app).get('/api/users/me').set('Authorization', 'Bearer someToken')
+  test('should create and return the logged in user', async () => {
+    const res = await request(app).get('/api/users/me')
 
-  //   expect(res.statusCode).toBe(200)
-  //   expect(res.body.firstName).toBe('Daniel')
-  //   expect(res.body.lastName).toBe('Sullivan')
-  //   expect(res.body.Accounts.length).toBe(0)
-  // })
+    expect(res.statusCode).toBe(200)
+    expect(res.body.auth0Id).toBe('madeup')
+    expect(res.body.Accounts.length).toBe(0)
+  })
 
   test('should get a user', async () => {
     const user = await db.User.create({ firstName: 'Firstname', lastName: 'Lastname' })
-    const res = await request(app).get(`/api/users/${user.id}`).set('Authorization', 'Bearer someToken')
+    const res = await request(app).get(`/api/users/${user.id}`)
 
     expect(res.statusCode).toBe(200)
     expect(res.type).toBe('application/json')
@@ -71,7 +71,7 @@ describe('user model', () => {
   })
 
   test('should create a user', async () => {
-    const res = await request(app).post('/api/users').send({ firstName: 'Firstname', lastName: 'Lastname' }).set('Authorization', 'Bearer someToken')
+    const res = await request(app).post('/api/users').send({ firstName: 'Firstname', lastName: 'Lastname' })
     const user = await db.User.findById(res.body.id, { include: 'Accounts' })
 
     expect(res.statusCode).toBe(201)
@@ -85,9 +85,9 @@ describe('user model', () => {
   })
 
   test('should list all users', async () => {
-    await db.User.create({ firstName: 'Firstname1', lastName: 'Lastname1', googleId: 'myGoogleId' })
+    await db.User.create({ firstName: 'Firstname1', lastName: 'Lastname1', auth0Id: 'madeup' })
     await db.User.create({ firstName: 'Firstname2', lastName: 'Lastname2' })
-    const res = await request(app).get('/api/users').set('Authorization', 'Bearer someToken')
+    const res = await request(app).get('/api/users')
 
     expect(res.statusCode).toBe(200)
     expect(res.type).toBe('application/json')
@@ -107,7 +107,6 @@ describe('user model', () => {
         firstName: 'DifferentFirstname',
         lastName: 'DifferentLastname',
       })
-      .set('Authorization', 'Bearer someToken')
 
     user = await db.User.findById(user.id)
 
@@ -121,7 +120,7 @@ describe('user model', () => {
 
   test('should delete a user', async () => {
     const user = await db.User.create({ firstName: 'Firstname', lastName: 'Lastname' })
-    const res = await request(app).delete(`/api/users/${user.id}`).set('Authorization', 'Bearer someToken')
+    const res = await request(app).delete(`/api/users/${user.id}`)
     const foundUser = await db.User.findById(user.id)
 
     expect(res.statusCode).toBe(204)

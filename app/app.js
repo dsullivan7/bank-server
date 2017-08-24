@@ -8,6 +8,7 @@ import bodyParser from 'body-parser'
 
 import config from './server/config/config'
 import routes from './server/routes'
+import { getUser } from './server/utils/routeUtils'
 
 const secret = jwksRsa.expressJwtSecret({
   cache: true,
@@ -33,9 +34,15 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Inject our routes into the application.
+// verify the authentication
 app.use('/api', jwtCheck)
+
+// retrieve the requesting user from the database
+app.use(getUser)
+
+// Inject our routes into the application.
 app.use('/api', routes)
+
 
 app.use(express.static(path.join(__dirname, 'public')))
 
