@@ -4,8 +4,8 @@ const User = models.User
 
 const create = (req, res) =>
   User.create({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     Accounts: [],
   }, { include: 'Accounts' })
     .then(user => res.status(201).send(user))
@@ -47,8 +47,8 @@ const update = (req, res) =>
         })
       } else {
         user.update({
-          firstname: req.body.firstname || user.firstname,
-          lastname: req.body.lastname || user.lastname,
+          firstName: req.body.firstName || user.firstName,
+          lastName: req.body.lastName || user.lastName,
         })
           .then(() => res.status(200).send(user))
           .catch(error => res.status(400).send(error))

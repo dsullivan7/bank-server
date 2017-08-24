@@ -26,19 +26,19 @@ apiRoutes.get('/', (req, res) => res.status(200).send({
  * @apiGroup Users
  * @apiName CreateUser
  *
- * @apiParam (Body Parameters) {String} [firstname]  Optional Firstname of the User
- * @apiParam (Body Parameters) {String} [lastname]  Optional Lastname of the User
+ * @apiParam (Body Parameters) {String} [firstName]  Optional First name of the User
+ * @apiParam (Body Parameters) {String} [lastName]  Optional Last name of the User
  *
- * @apiSuccess (Response Fields) {String} firstname Firstname of the User
- * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {String} firstName First name of the User
+ * @apiSuccess (Response Fields) {String} lastName  Last name of the User
  * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
  * @apiSuccess (Response Fields) {Number} id  Id of the User
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 201 Created
  *     {
- *       "firstname": "Michael",
- *       "lastname": "Jordan",
+ *       "firstName": "Michael",
+ *       "lastName": "Jordan",
  *       "Accounts": [],
  *       "id": 1
  *     }
@@ -52,8 +52,8 @@ apiRoutes.post('/users', usersController.create)
  * @apiGroup Users
  * @apiName ListUsers
  *
- * @apiSuccess (Response Fields) {String} firstname Firstname of the User
- * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {String} firstName First name of the User
+ * @apiSuccess (Response Fields) {String} lastName  Last name of the User
  * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
  * @apiSuccess (Response Fields) {Number} id  Id of the User
  *
@@ -61,14 +61,14 @@ apiRoutes.post('/users', usersController.create)
  *     HTTP/1.1 200 OK
  *     [
  *       {
- *         "firstname": "Michael",
- *         "lastname": "Jordan",
+ *         "firstName": "Michael",
+ *         "lastName": "Jordan",
  *         "Accounts": [],
  *         "id": 1
  *       },
  *       {
- *         "firstname": "Kobe",
- *         "lastname": "Bryant",
+ *         "firstName": "Kobe",
+ *         "lastName": "Bryant",
  *         "Accounts": [],
  *         "id": 2
  *       },
@@ -85,16 +85,16 @@ apiRoutes.get('/users', usersController.list)
  *
  * @apiParam (Path Parameters) {Number} id User's unique ID
  *
- * @apiSuccess (Response Fields) {String} firstname Firstname of the User
- * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {String} firstName First name of the User
+ * @apiSuccess (Response Fields) {String} lastName  Last name of the User
  * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
  * @apiSuccess (Response Fields) {Number} id  Id of the User
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "firstname": "Michael",
- *       "lastname": "Jordan",
+ *       "firstName": "Michael",
+ *       "lastName": "Jordan",
  *       "Accounts": [],
  *       "id": 1
  *     }
@@ -117,19 +117,19 @@ apiRoutes.get('/users/:userId', usersController.retrieve)
  *
  * @apiParam (Path Parameters) {Number} id User's unique ID
  *
- * @apiParam (Body Parameters) {String} [firstname]  Optional Firstname of the User
- * @apiParam (Body Parameters) {String} [lastname]   Optional Lastname of the User
+ * @apiParam (Body Parameters) {String} [firstName]  Optional First name of the User
+ * @apiParam (Body Parameters) {String} [lastName]   Optional Last name of the User
  *
- * @apiSuccess (Response Fields) {String} firstname Firstname of the User
- * @apiSuccess (Response Fields) {String} lastname  Lastname of the User
+ * @apiSuccess (Response Fields) {String} firstName First name of the User
+ * @apiSuccess (Response Fields) {String} lastName  Last name of the User
  * @apiSuccess (Response Fields) {Object[]} Accounts  Array of Accounts the User owns
  * @apiSuccess (Response Fields) {Number} id  Id of the User
  *
  * @apiSuccessExample Success-Response:
  *     HTTP/1.1 200 OK
  *     {
- *       "firstname": "Michael",
- *       "lastname": "Jordan",
+ *       "firstName": "Michael",
+ *       "lastName": "Jordan",
  *       "Accounts": [],
  *       "id": 1
  *     }
@@ -196,13 +196,13 @@ apiRoutes.delete('/users/:userId', usersController.destroy)
  *       "balance": 100.99,
  *       "Users": [
  *       {
- *         "firstname": "Michael",
- *         "lastname": "Jordan",
+ *         "firstName": "Michael",
+ *         "lastName": "Jordan",
  *         "id": 1
  *       },
  *       {
- *         "firstname": "Kobe",
- *         "lastname": "Bryant",
+ *         "firstName": "Kobe",
+ *         "lastName": "Bryant",
  *         "id": 2
  *       }
  *     ],
@@ -269,8 +269,8 @@ apiRoutes.get('/accounts', accountsController.list)
  *       "balance": 100.99,
  *       "Users": [
  *       {
- *         "firstname": "Kobe",
- *         "lastname": "Bryant",
+ *         "firstName": "Kobe",
+ *         "lastName": "Bryant",
  *         "id": 2
  *       }
  *       ],
