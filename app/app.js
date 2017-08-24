@@ -38,7 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/api', jwtCheck)
 
 // retrieve the requesting user from the database
-app.use(getUser)
+app.use('/api', getUser)
 
 // Inject our routes into the application.
 app.use('/api', routes)
