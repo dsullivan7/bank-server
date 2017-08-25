@@ -1,9 +1,22 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
-const App = () => (
-  <div style={{ textAlign: 'center' }}>
-    <h1>Hello World</h1>
-  </div>
-)
+export default class App extends React.Component {
+  componentDidMount() {
+    this.handleAuthentication()
+  }
 
-export default App
+  login = () => this.props.auth.login()
+
+  handleAuthentication = () => this.props.auth.handleAuthentication()
+
+  render() {
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <Button bsStyle="primary" onClick={this.login}>
+          Log In
+        </Button>
+      </div>
+    )
+  }
+}

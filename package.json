@@ -14,10 +14,10 @@
     "clean": "rimraf dist",
     "build": "babel app  --ignore app/test --copy-files --out-dir dist",
     "build-client": "webpack",
-    "client-dev": "webpack-dev-server",
     "lint": "eslint app",
-    "start": "npm run clean && npm run build && npm run migrate && npm run docs && node ./dist/bin/start",
+    "start": "npm run clean && npm run build && npm run build-client && npm run migrate && npm run docs && node ./dist/bin/start",
     "start-dev": "nodemon ./app/bin/start --exec babel-node",
+    "client-watch": "webpack-dev-server",
     "migrate": "sequelize db:migrate",
     "migrate-undo": "sequelize db:migrate:undo"
   },
@@ -37,6 +37,7 @@
     "node": "8.1.4"
   },
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
     "coveralls": "^2.13.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.2",
@@ -51,6 +52,7 @@
   },
   "dependencies": {
     "apidoc": "^0.17.6",
+    "auth0-js": "^8.9.3",
     "babel-cli": "^6.24.1",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
@@ -68,6 +70,7 @@
     "pg": "^6.4.2",
     "pg-hstore": "^2.3.2",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",
     "rimraf": "^2.6.1",
     "sequelize": "^4.7.2",
